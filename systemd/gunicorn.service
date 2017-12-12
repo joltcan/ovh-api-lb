@@ -1,0 +1,20 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+
+User=www-data
+Group=www-data
+PIDFile=/run/gunicorn/pid
+WorkingDirectory=/home/jolt/src/ovh-api
+ExecStart=/<USERHOME>/src/ovh-api/flask/bin/gunicorn --bind unix:/run/gunicorn/socket --pid /run/gunicorn/pid app:app
+ExecStop=/bin/kill -s TERM $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RuntimeDirectory=gunicorn
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

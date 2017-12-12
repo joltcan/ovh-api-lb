@@ -1,0 +1,14 @@
+class Config(object):
+    DEBUG = False
+    TESTING = False
+    KEY = '<api-key>'
+    SECRET = '<api-secret'>
+    CONSUMER = '< output from auth.py >'
+    LBSERVICE = '<load balancer like ip-11.22.33.44>'
+
+class ProductionConfig(Config):
+    DEBUG = False
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+
